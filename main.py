@@ -1,8 +1,10 @@
 rumus_map = {
-    "1": lambda sisi: sisi**2, # persegi
-    "2": lambda panjang, lebar: panjang * lebar, # persegi panjang
-    "3": lambda atas, alas, tinggi: (atas + alas) * tinggi / 2,
-    "4": lambda radius: 22 / 7 * radius, #lingkaran
+    "2": lambda sisi: sisi**2, # persegi
+    "3": lambda panjang, lebar: panjang * lebar, # persegi panjang
+    "4": lambda atas, alas, tinggi: (atas + alas) * tinggi / 2,
+    "5": lambda radius: 22 / 7 * radius * radius, #lingkaran
+    "6": lambda alas, tinggi: alas * tinggi, # jajar genjang
+    "7": lambda d1, d2: d1 * d2 / 2,
 }
 
 satuan_map = {
@@ -86,14 +88,17 @@ while True:
     3. Luas Persegi Panjang
     4. Luas Trapesium
     5. Luas Lingkaran  
+    6. Jajar Genjang
+    7. Layang - Layang
     """)
 
     operasi = str(input("Masukkan opsi yang ingin dilakukan: "))
     
-    # persegi
+    # exit
     if operasi == "0":
         break
     
+    # konversi satuan 
     elif operasi == "1":
         angka = float(input("Masukkan angka: "))
         satuan_awal = str(input("Masukkan satuan awal: "))
@@ -101,25 +106,23 @@ while True:
         if satuan_awal == satuan_akhir:
             pass
         elif satuan_awal.lower() in satuan_map and satuan_akhir.lower() in satuan_map:
-            print(f"{angka} {satuan_awal} = {konversi_satuan[satuan_awal][satuan_akhir](angka):,.2f} {satuan_akhir}")
+            print(f"{angka} {satuan_awal} = {konversi_satuan.get(satuan_awal).get(satuan_akhir)(angka):,.2f} {satuan_akhir}")
         else:
             print("satuan tidak valid")
             continue
                 
-                
+    # persegi
     elif operasi == "2":
         sisi = float(input("Masukkan panjang sisi: "))
         satuan = str(input("Masukkan satuan: "))
-        if satuan.lower() in satuan_map:
-            print(f"{sisi} {satuan} x {sisi} {satuan} = {rumus_map["1"](sisi)}")
+        print(f"{sisi} {satuan} x {sisi} {satuan} = {rumus_map.get(operasi)(sisi):,.2f} {satuan_map.get(satuan)}")
     
     # persegi panjang
     elif operasi == "3":
         panjang = float(input("Masukkan panjang: "))
         lebar = float(input("Masukkan lebar: "))
         satuan = str(input("Masukkan satuan: "))
-        if satuan.lower() in satuan_map:
-            print(f"{panjang} {satuan} x {lebar} {satuan} = {rumus_map["2"](panjang, lebar)} {satuan_map[satuan]}")
+        print(f"{panjang} {satuan} x {lebar} {satuan} = {rumus_map.get(operasi)(panjang, lebar):,.2f} {satuan_map.get(satuan)}")
     
     # trapesium
     elif operasi == "4":
@@ -127,16 +130,27 @@ while True:
         alas = float(input("Masukkan panjang alas: "))
         tinggi = float(input("Masukkan tinggi: "))
         satuan = str(input("Masukkan satuan: "))
-        if satuan.lower() in satuan_map:
-            print(f"({atas} {satuan} + {alas} {satuan}) x {tinggi} {satuan} / 2 = {rumus_map["3"](atas, alas, tinggi)} {satuan_map[satuan]}")
+        print(f"({atas} {satuan} + {alas} {satuan}) x {tinggi} {satuan} / 2 = {rumus_map.get(operasi)(atas, alas, tinggi):,.2f} {satuan_map.get(satuan)}")
             
     # lingkaran
     elif operasi == "5":
         radius = float(input("Masukkan radius: "))
         satuan = str(input("Masukkan satuan: "))
-        if satuan.lower() in satuan_map:
-            print(f"22 / 7 x {radius} {satuan} x {radius} {satuan} = {rumus_map["4"](radius):.2f} {satuan_map[satuan]}")        
+        print(f"22 / 7 x {radius} {satuan} x {radius} {satuan} = {rumus_map.get(operasi)(radius):.2f} {satuan_map.get(satuan)}")        
+    
+    # jajar genjang
+    elif operasi == "6":
+        alas = float(input("Masukkan alas: "))
+        tinggi = float(input("Masukkan tinggi: "))
+        satuan = str(input("Masukkan satuan: "))
+        print(f"{alas} {satuan} x {tinggi} {satuan} = {rumus_map.get(operasi)(alas, tinggi):,.2f} {satuan_map.get(satuan)}")
         
+    elif operasi == "7":
+        d1 = float(input("Masukkan diagonal1: "))
+        d2 = float(input("Masukkan diagonal2: "))
+        satuan = str(input("Masukkan satuan: "))
+        print(f"{d1} {satuan} x {d2} {satuan} = {rumus_map.get(operasi)(d1, d2):,.2f} {satuan_map.get(satuan)}")    
+    
     # break
     is_keluar = str(input("\nApakah ingin keluar (y/n)?"))
     if is_keluar == "y":
@@ -145,7 +159,7 @@ while True:
         None
     else:
         print("Unknown Input")
-        break
+        None
     
     
     
