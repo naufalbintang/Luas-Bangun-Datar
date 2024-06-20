@@ -1,5 +1,5 @@
 import os
-import rumus_luas
+from luas import rumus_luas
 
 while True:
     os.system('cls')
@@ -8,7 +8,9 @@ while True:
     # pilih operasi
     print('''
     0. Keluar
-    1. Luas
+    1. Konversi Satuan
+    2. Luas
+    3. Volume
     ''')
     input_operasi: int = int(input('Masukkan pilihan: ')) 
     
@@ -17,7 +19,7 @@ while True:
         break
     
     # pilih operasi luas
-    elif input_operasi == 1:
+    elif input_operasi == 2:
         print('''
         1. Luas Persegi
         2. Luas Persegi Panjang
