@@ -26,3 +26,4 @@ def luas_layang_layang(d1: float, d2: float) -> float:
 
 def luas_segitiga(alas: float, tinggi: float) -> float:
     hasil: float = alas * tinggi / 2
+    return hasil
